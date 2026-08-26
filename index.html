@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hi"><head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>HRGen LIS</title>
+<style>
+:root{--p:#4B1FE0;--y:#FFC107;--bg:#0b0718;--t:#f7f4ff;--m:#b9b0d0}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;background:radial-gradient(800px 400px at 10% -10%,rgba(75,31,224,.45),transparent),var(--bg);color:var(--t);min-height:100vh}
+.hidden{display:none!important}.glass{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:14px}
+.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
+.login-card{width:min(400px,100%);padding:24px;text-align:center}h1{margin:8px 0}
+.muted{color:var(--m);font-size:13px}label{display:block;text-align:left;margin:10px 0 4px;font-size:13px;color:var(--m)}
+input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(0,0,0,.3);color:var(--t)}
+.btn-gold{width:100%;margin-top:12px;border:0;border-radius:12px;padding:11px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--y),#ffde7a);color:#2a1a00}
+.btn-outline{border:1px solid rgba(255,193,7,.5);background:transparent;color:var(--y);border-radius:10px;padding:8px 12px;cursor:pointer}
+.btn-ghost{background:transparent;border:0;color:var(--m);cursor:pointer}
+.app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+.sidebar{padding:16px;background:rgba(8,4,20,.75);border-right:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;gap:8px}
+.nav-btn{text-align:left;background:transparent;color:var(--t);border:0;padding:10px;border-radius:10px;cursor:pointer}
+.nav-btn.active,.nav-btn:hover{background:rgba(75,31,224,.35)}
+main{padding:16px 20px}.topbar{display:flex;justify-content:space-between;align-items:center}
+.pill{background:rgba(194,24,91,.3);padding:4px 10px;border-radius:999px;font-size:12px}
+.net{padding:4px 10px;border-radius:999px;font-size:12px;font-weight:700}.online{background:rgba(34,197,94,.25);color:#86efac}.offline{background:rgba(239,68,68,.25);color:#fca5a5}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:14px}.stat b{display:block;font-size:22px;margin-top:4px}
+.panel{padding:14px;margin-top:12px}.grid-2{display:grid;grid-template-columns:1.4fr .8fr;gap:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.final{font-size:20px;color:var(--y)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.chip{background:rgba(75,31,224,.35);border-radius:999px;padding:6px 10px;cursor:pointer;font-size:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:6px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}
+.flag-H{color:#ef4444;font-weight:800}.flag-L{color:#3b82f6;font-weight:800}.flag-N{color:#22c55e;font-weight:800}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:grid;place-items:center;padding:16px}
+.modal-card{width:min(640px,100%);padding:16px}.bill-sheet{background:#fff;color:#111;padding:16px;border-radius:8px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.quick{display:flex;gap:8px;margin:12px 0}
+@media(max-width:800px){.app{grid-template-columns:1fr}.stats,.grid-2,.form-grid{grid-template-columns:1fr}}
+</style></head><body>
+<div id="loginScreen" class="login-wrap"><div class="login-card glass">
+<h1>HRGen LIS</h1><p class="muted">Offline-first Lab System</p>
+<form id="loginForm"><label>Username</label><input id="username" required/>
+<label>Password</label><input id="password" type="password" required/>
+<button class="btn-gold" type="submit">Login</button></form>
+<p class="muted">Demo: admin / admin123</p></div></div>
+<div id="appScreen" class="app hidden">
+<aside class="sidebar"><strong>HRGen LIS</strong>
+<button class="nav-btn active" data-page="dashboard">Dashboard</button>
+<button class="nav-btn" data-page="newbill">New Bill</button>
+<button class="nav-btn" data-page="results">Result Entry</button>
+<button class="nav-btn" data-page="masters">Test Master</button>
+<button class="nav-btn" data-page="reports">Reports</button>
+<button class="nav-btn" data-page="settings">Settings</button>
+<button id="logoutBtn" class="btn-ghost">Logout</button></aside>
+<main>
+<header class="topbar"><h2 id="pageTitle">Dashboard</h2>
+<div class="row"><span id="netBadge" class="net offline">OFFLINE</span><span id="syncBadge" class="pill">Outbox 0</span><span class="pill" id="userPill"></span></div></header>
+<section id="page-dashboard" class="page">
+<div class="stats">
+<div class="stat glass"><span class="muted">Aaj Bills</span><b id="statBills">0</b></div>
+<div class="stat glass"><span class="muted">Patients</span><b id="statPatients">0</b></div>
+<div class="stat glass"><span class="muted">Pending</span><b id="statPending">0</b></div>
+<div class="stat glass"><span class="muted">Collection</span><b id="statCash">₹0</b></div></div>
+<div class="quick"><button class="btn-gold" style="width:auto" data-goto="newbill">+ New Bill</button>
+<button class="btn-outline" data-goto="results">Results</button></div>
+<div class="panel glass"><h3>Last bills</h3><div id="dashBills"></div></div></section>
+<section id="page-newbill" class="page hidden">
+<div class="grid-2"><div class="panel glass"><h3>Patient</h3><div class="form-grid">
+<label>Mobile<input id="pMobile" maxlength="10"/></label><label>Name<input id="pName"/></label>
+<label>Age<input id="pAge" type="number"/></label><label>Gender<select id="pGender"><option>Male</option><option>Female</option><option>Other</option></select></label>
+<label>Doctor<input id="pDoctor"/></label><label>Address<input id="pAddress"/></label></div></div>
+<div class="panel glass"><h3>Summary</h3><p>Subtotal <b id="subTotal">₹0</b></p>
+<label>Discount<input id="discount" type="number" value="0"/></label>
+<p class="final">Payable <b id="finalAmt">₹0</b></p>
+<button class="btn-gold" id="saveBillBtn">Generate Bill</button></div></div>
+<div class="panel glass"><h3>Tests</h3><input id="testSearch" placeholder="Search test"/><div id="testPick" class="chips"></div><div id="selectedTests"></div></div></section>
+<section id="page-results" class="page hidden"><div class="panel glass">
+<div class="row"><input id="resultSearch" placeholder="Bill / name / mobile"/><button class="btn-outline" id="loadResultBtn">Load</button></div>
+<div id="resultHead" class="muted"></div><div id="resultTable"></div>
+<label>Interpretation<textarea id="interpretation" rows="2"></textarea></label>
+<button class="btn-gold" id="saveResultBtn">Save Report</button></div></section>
+<section id="page-masters" class="page hidden"><div class="panel glass">
+<div class="form-grid"><label>Name<input id="mName"/></label><label>Dept<input id="mDept"/></label>
+<label>Price<input id="mPrice" type="number"/></label><label>Unit<input id="mUnit"/></label>
+<label>Low<input id="mLow" type="number" step="0.01"/></label><label>High<input id="mHigh" type="number" step="0.01"/></label></div>
+<button class="btn-gold" id="addTestBtn">Add Test</button><div id="masterTable"></div></div></section>
+<section id="page-reports" class="page hidden"><div class="panel glass">
+<div class="row"><input id="repFrom" type="date"/><input id="repTo" type="date"/><button class="btn-outline" id="filterRepBtn">Filter</button></div>
+<div id="reportTable"></div></div></section>
+<section id="page-settings" class="page hidden"><div class="panel glass">
+<label>Lab Name<input id="sLabName"/></label><label>Address<input id="sAddress"/></label>
+<label>Phone<input id="sPhone"/></label><label>WA<input id="sWa"/></label>
+<button class="btn-gold" id="saveSetBtn">Save</button>
+<div class="row" style="margin-top:10px"><button class="btn-outline" id="exportBtn">Export</button>
+<button class="btn-outline" id="importBtn">Import</button><input id="importFile" type="file" accept="application/json" class="hidden"/></div>
+</div></section>
+</main></div>
+<div id="printModal" class="modal hidden"><div class="modal-card glass"><div id="billPrint"></div>
+<div class="row"><button class="btn-gold" id="doPrintBtn">Print</button>
+<button class="btn-outline" id="waBtn">WhatsApp</button>
+<button class="btn-ghost" id="closePrint">Close</button></div></div></div>
+<script src="app.js"></script>
+</body></html>
