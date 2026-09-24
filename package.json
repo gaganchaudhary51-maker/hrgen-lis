@@ -1,0 +1,13 @@
+{
+  "name": "hrgen-lis-pro",
+  "version": "1.1.0",
+  "description": "Full-stack-ready lab workflow and billing system for HRGen LIS",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

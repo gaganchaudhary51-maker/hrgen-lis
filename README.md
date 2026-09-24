@@ -1,38 +1,39 @@
 # HRGen LIS Pro
 
-Open: https://gaganchaudhary51-maker.github.io/hrgen-lis/
-
-Login: admin / admin123
-
-Offline-first lab billing software with AI-assisted workflow helpers, voice command support, auto-generated clinical summaries, and workflow automation cards.
+A lightweight lab information system for billing, result entry, reports, and AI-assisted workflow support.
 
 ## Features
 
-- Patient billing and lab test selection
-- Offline-first local storage workflow
-- Result entry with low/high range flags
-- Report generation and date filters
-- Test master management
-- WhatsApp and print workflow
-- Voice command interface using browser speech recognition
-- Smart AI recommendations for pending work and abnormal values
-- Automation dashboard for review and follow-up tasks
-- JSON export/import for backup and restore
+- Patient registration and billing
+- Lab test master and price management
+- Result entry with low/high range indicators
+- Staff reports and date filters
+- Offline-first local workflow support
+- AI summary and automation cards
+- Voice command support via browser speech recognition
+- Optional full-stack backend shell for further expansion
 
-## Run locally
+## Run the app
 
-Open `index.html` directly in a browser, or serve the folder with a local static server:
+With the backend included, you can run it as a simple local Node app:
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm start
 ```
 
-Then visit:
+Then open:
 
 ```text
-http://localhost:8000
+http://localhost:3000
+```
+
+Demo login:
+
+```text
+admin / admin123
 ```
 
 ## Notes
 
-This is a front-end prototype designed to be fast, offline, and usable in local lab environments. It is ideal for demos, small clinics, and early-stage lab automation workflows.
+This version is still a front-end prototype with a backend-ready data layer. It is suitable for local demos, small lab workflows, and extended project development, but it should not be used as a production-grade patient record system without a full security and compliance review.

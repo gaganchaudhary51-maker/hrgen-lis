@@ -1,0 +1,59 @@
+{
+  "settings": {
+    "labName": "HRGen Diagnostics",
+    "address": "Aligarh",
+    "phone": "",
+    "wa": ""
+  },
+  "users": [
+    {
+      "id": "u1",
+      "username": "admin",
+      "passwordHash": "2d0eecf4b7f8a4f5e50d6d4a3ac2d09f8c235f1db1dc07c6e8dcd13f0ea2a2f2",
+      "role": "Admin"
+    }
+  ],
+  "tests": [
+    {
+      "id": "t1",
+      "name": "CBC",
+      "dept": "Hematology",
+      "price": 350,
+      "unit": "",
+      "low": null,
+      "high": null
+    },
+    {
+      "id": "t2",
+      "name": "Hemoglobin",
+      "dept": "Hematology",
+      "price": 120,
+      "unit": "g/dL",
+      "low": 12,
+      "high": 16
+    },
+    {
+      "id": "t3",
+      "name": "Blood Sugar Fasting",
+      "dept": "Biochemistry",
+      "price": 80,
+      "unit": "mg/dL",
+      "low": 70,
+      "high": 100
+    },
+    {
+      "id": "t4",
+      "name": "HbA1c",
+      "dept": "Biochemistry",
+      "price": 450,
+      "unit": "%",
+      "low": 4,
+      "high": 5.6
+    }
+  ],
+  "bills": [],
+  "patients": [],
+  "workflows": [],
+  "queue": [],
+  "aiLog": []
+}
