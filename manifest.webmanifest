@@ -1,0 +1,9 @@
+{
+  "name": "HRGen LIS Enterprise",
+  "short_name": "HRGen LIS",
+  "start_url": "/enterprise.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#081526",
+  "description": "Online and offline-ready enterprise laboratory information system"
+}
