@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "roles": [
+    {"id":"super_admin","name":"Super Admin","scope":"platform","permissions":["platform.manage","labs.manage","backup.manage","audit.read"]},
+    {"id":"lab_owner","name":"Lab Owner","scope":"lab","permissions":["lab.manage","users.manage","billing.manage","reports.authorize","quality.manage","inventory.manage","settings.manage","audit.read"]},
+    {"id":"reception","name":"Reception & Billing","scope":"lab","permissions":["patients.read","patients.write","orders.create","billing.create","payments.create","samples.collect"]},
+    {"id":"phlebotomist","name":"Phlebotomist","scope":"collection_centre","permissions":["patients.read","samples.collect","samples.handover","home_collection.read"]},
+    {"id":"collection_manager","name":"Collection Centre Manager","scope":"collection_centre","permissions":["patients.read","orders.create","samples.collect","samples.receive","samples.dispatch"]},
+    {"id":"lab_technician","name":"Lab Technician","scope":"department","permissions":["samples.receive","samples.reject","worklist.read","results.enter","results.provisional_verify"]},
+    {"id":"quality_manager","name":"Quality Manager","scope":"lab","permissions":["qc.manage","capa.manage","training.manage","documents.manage","equipment.manage","audit.read"]},
+    {"id":"pathologist","name":"Pathologist / Final Doctor","scope":"lab","permissions":["results.review","results.final_verify","reports.release","reports.amend","interpretations.manage"]},
+    {"id":"hr","name":"HR","scope":"lab","permissions":["employees.manage","training.manage","competency.manage"]},
+    {"id":"finance","name":"Finance","scope":"lab","permissions":["billing.read","payments.manage","refunds.manage","expenses.manage","finance.reports"]},
+    {"id":"procurement","name":"Procurement","scope":"lab","permissions":["vendors.manage","purchase_orders.manage","inventory.manage","reagents.manage"]},
+    {"id":"referral_doctor","name":"Referral Doctor / B2B","scope":"assigned_cases","permissions":["orders.create","reports.read_assigned"]}
+  ],
+  "modules": {
+    "core": true,
+    "billing": true,
+    "sample_tracking": true,
+    "results": true,
+    "reports": true,
+    "quality": false,
+    "inventory": false,
+    "procurement": false,
+    "b2b": false,
+    "analyzer": false,
+    "nabl": false,
+    "ai_drafts": false
+  }
+}

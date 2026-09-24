@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "entities": {
+    "labs": ["id","name","status","timezone","createdAt"],
+    "users": ["id","labId","username","roleId","status","lastLoginAt"],
+    "patients": ["id","labId","uhid","name","mobile","age","gender","address","createdAt"],
+    "orders": ["id","labId","orderNo","patientId","doctorId","status","subtotal","discount","tax","total","createdBy","createdAt"],
+    "orderItems": ["id","orderId","testId","sampleId","price","status"],
+    "samples": ["id","orderId","barcode","type","container","status","collectedAt","receivedAt","receivedBy","rejectionReason"],
+    "results": ["id","orderItemId","value","unit","referenceRange","method","status","enteredBy","provisionalBy","finalVerifiedBy","verifiedAt"],
+    "reports": ["id","orderId","version","status","templateId","signedBy","releasedAt","amendmentReason"],
+    "payments": ["id","orderId","mode","amount","reference","receivedBy","receivedAt"],
+    "auditEvents": ["id","labId","actorId","action","entity","entityId","before","after","reason","createdAt"],
+    "qcRuns": ["id","labId","department","testId","controlLot","level","value","status","rule","performedBy","performedAt"],
+    "inventoryLots": ["id","labId","itemId","lotNo","expiryDate","quantity","unit","storage","status"],
+    "trainingRecords": ["id","labId","employeeId","topic","trainer","completedAt","score","competencyStatus","nextReviewAt"],
+    "capaRecords": ["id","labId","source","severity","description","rootCause","correction","preventiveAction","ownerId","status","dueDate"]
+  },
+  "lifecycle": ["order_created","sample_collected","sample_received","sample_accepted_or_rejected","processing","result_entered","provisional_verified","final_verified","report_released","report_amended"]
+}
