@@ -1,39 +1,37 @@
-# HRGen LIS Pro
+# HRGen LIS Enterprise
 
-A lightweight lab information system for billing, result entry, reports, and AI-assisted workflow support.
+Enterprise online/offline LIS foundation for diagnostic laboratories, collection centres and referral networks.
 
-## Features
-
-- Patient registration and billing
-- Lab test master and price management
-- Result entry with low/high range indicators
-- Staff reports and date filters
-- Offline-first local workflow support
-- AI summary and automation cards
-- Voice command support via browser speech recognition
-- Optional full-stack backend shell for further expansion
-
-## Run the app
-
-With the backend included, you can run it as a simple local Node app:
+## Run locally
 
 ```bash
 npm install
 npm start
 ```
 
-Then open:
+Open `http://localhost:3000`.
 
-```text
-http://localhost:3000
-```
+Development demo login: `admin / admin123`.
+Change this credential before any real deployment.
 
-Demo login:
+## Included enterprise API foundation
 
-```text
-admin / admin123
-```
+- Tenant-aware lab/user records
+- Super Admin and Lab Owner separation
+- Role and permission checks from `data/access-control.json`
+- Patient/order/billing creation
+- Payment-ready order totals with discount and tax
+- Sample collection, receiving, acceptance/rejection status
+- Department worklist endpoint
+- Idempotent offline sync endpoint using `clientEventId`
+- Audit events for protected mutations
+- Permission-sensitive user and test management
+- Report and AI-summary API boundaries
 
-## Notes
+## Online/offline contract
 
-This version is still a front-end prototype with a backend-ready data layer. It is suitable for local demos, small lab workflows, and extended project development, but it should not be used as a production-grade patient record system without a full security and compliance review.
+The browser can create immutable local events with a unique `clientEventId`. When online, send them to `POST /api/sync` with the current bearer token. The server ignores duplicate event IDs. Clinical final verification and released reports must use server-authorized actions and must never be silently overwritten during synchronization.
+
+## Production gate
+
+This JSON persistence layer is for development only. Before commercial deployment, migrate to PostgreSQL or another transactional database, use Argon2id/bcrypt password hashing, secure cookie sessions or short-lived tokens, HTTPS, encryption at rest, rate limiting, CSRF protection, tenant isolation tests, backups, monitoring and disaster recovery. NABL support in the product does not itself grant accreditation.
