@@ -1,9 +1,19 @@
 {
   "name": "hrgen-lis-enterprise",
-  "version": "2.0.0",
-  "description": "Online/offline enterprise laboratory information system foundation",
+  "version": "2.1.0",
+  "description": "Scalable laboratory information system backend foundation with real auth, RBAC, order flow, and Postgres-ready storage",
   "main": "server.js",
-  "scripts": {"start":"node server.js","dev":"node server.js"},
-  "engines": {"node": ">=18"},
-  "dependencies": {"express":"^4.19.2"}
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.0"
+  }
 }
