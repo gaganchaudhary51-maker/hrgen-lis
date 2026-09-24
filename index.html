@@ -6,70 +6,189 @@
   <title>HRGen LIS Pro</title>
   <style>
     :root{
-      --bg:#0b0718;--panel:#121426;--panel2:#1b1a2c;--line:rgba(255,255,255,.08);--text:#f5f3ff;--muted:#b8afd0;
-      --primary:#6d5efc;--accent:#f7c948;--success:#2dd4bf;--warning:#f59e0b;--danger:#ef4444;--info:#60a5fa
+      --bg:#050816;
+      --bg-2:#0b1022;
+      --panel:rgba(16, 22, 42, 0.74);
+      --panel-strong:#10182f;
+      --panel-soft:rgba(255,255,255,0.04);
+      --line:rgba(255,255,255,0.10);
+      --text:#edf2ff;
+      --muted:#a8b3ce;
+      --primary:#7c6af8;
+      --primary-strong:#5f4ef0;
+      --accent:#f8d76c;
+      --accent-2:#ffd477;
+      --success:#2dd4bf;
+      --warning:#fbbf24;
+      --danger:#ef4444;
+      --info:#60a5fa;
+      --shadow:0 30px 70px rgba(5, 8, 22, 0.65);
+      --radius:20px;
     }
-    *{box-sizing:border-box} html,body{margin:0;font-family:system-ui,sans-serif;background:radial-gradient(700px 280px at -10% -10%,rgba(109,94,252,.35),transparent),var(--bg);color:var(--text);min-height:100vh}
-    .hidden{display:none!important}.glass{background:rgba(255,255,255,.05);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:16px}
-    .login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(420px,100%);padding:28px;text-align:center}
-    h1,h2,h3,h4,p{margin:0 0 10px}.muted{color:var(--muted);font-size:13px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    input,select,textarea{width:100%;padding:10px 11px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.26);color:var(--text);outline:none}
-    textarea{resize:vertical}.label{display:block;text-align:left;margin:10px 0 4px;font-size:13px;color:var(--muted)}
-    .btn-gold,.btn-outline,.btn-ghost,.nav-btn,.chip,.quick-btn{cursor:pointer;border-radius:12px;transition:.2s ease}
-    .btn-gold{width:100%;margin-top:12px;border:0;padding:11px;font-weight:700;background:linear-gradient(135deg,var(--accent),#ffe08a);color:#2a1a00}
-    .btn-outline{border:1px solid rgba(247,201,73,.4);background:transparent;color:var(--accent);padding:8px 12px}.btn-ghost{background:transparent;border:0;color:var(--muted);padding:8px}
-    .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}.sidebar{padding:16px;background:rgba(7,6,18,.8);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
-    .nav-btn{text-align:left;background:transparent;color:var(--text);border:0;padding:11px 12px}.nav-btn.active,.nav-btn:hover{background:rgba(109,94,252,.28)}
-    main{padding:16px 20px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}.pill{background:rgba(194,24,91,.26);padding:5px 10px;border-radius:999px;font-size:12px}.net{padding:5px 10px;border-radius:999px;font-size:12px;font-weight:700}.online{background:rgba(34,197,94,.2);color:#86efac}.offline{background:rgba(239,68,68,.25);color:#fca5a5}
-    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{padding:16px}.stat b{display:block;font-size:22px;margin-top:6px}
-    .panel{padding:14px;margin-top:12px}.grid-2{display:grid;grid-template-columns:1.4fr .8fr;gap:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .quick{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.quick-btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 12px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:var(--text)}
-    .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.chip{background:rgba(109,94,252,.28);border:0;padding:7px 10px;font-size:12px;color:var(--text)}
-    table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:top}
-    .flag-H{color:#ef4444;font-weight:800}.flag-L{color:#60a5fa;font-weight:800}.flag-N{color:#2dd4bf;font-weight:800}
-    .final{font-size:22px;color:var(--accent)}.notice{background:rgba(96,165,250,.14);border:1px solid rgba(96,165,250,.3);color:#dbeafe;padding:10px;border-radius:12px;margin-top:10px}
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.kpi{padding:12px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:grid;place-items:center;padding:16px}.modal-card{width:min(760px,100%);padding:18px}.bill-sheet{background:#fff;color:#121212;padding:18px;border-radius:10px}
-    .badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}
-    .badge.warn{background:rgba(245,158,11,.15);color:#fbbf24}.badge.good{background:rgba(45,212,191,.15);color:#5eead4}.badge.bad{background:rgba(239,68,68,.12);color:#fca5a5}
-    .assistant-box{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.ai-card{padding:14px}.voice-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 14px;background:linear-gradient(135deg,#1f2937,#0f172a);border:1px solid rgba(96,165,250,.4);color:#dbeafe;border-radius:12px;cursor:pointer}
-    .log-list{max-height:180px;overflow:auto;padding-left:16px;margin:8px 0 0}
-    .list-inline{margin:0;padding:0;list-style:none}.list-inline li{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)}
-    @media(max-width:800px){.app{grid-template-columns:1fr}.stats,.grid-2,.form-grid,.assistant-box,.kpis{grid-template-columns:1fr}.main{padding:12px}}
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,Segoe UI,system-ui,sans-serif;background:radial-gradient(circle at top left, rgba(124,106,248,.18), transparent 28%), radial-gradient(circle at bottom right, rgba(45,212,191,.12), transparent 35%), linear-gradient(180deg, var(--bg), var(--bg-2));color:var(--text);}
+    body{position:relative;overflow-x:hidden;}
+    #bgCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.8;pointer-events:none;}
+
+    .glass{
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    .login-wrap,.app{position:relative;z-index:1}
+    .login-wrap{min-height:100vh;display:grid;place-items:center;padding:22px}
+    .login-card{
+      width:min(440px,100%);
+      padding:28px 26px 20px;
+      border-radius:28px;
+      text-align:center;
+      background:rgba(13,18,33,0.78);
+      border:1px solid rgba(255,255,255,0.1);
+      position:relative;
+      overflow:hidden;
+    }
+    .login-card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background:linear-gradient(135deg, rgba(124,106,248,.45), rgba(248,215,108,.25), rgba(45,212,191,.2));
+      z-index:-1;
+      filter:blur(12px);
+      opacity:.6;
+    }
+    .brand-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:52px;height:52px;border-radius:16px;
+      font-weight:900;color:#0d1020;background:linear-gradient(135deg,var(--accent),#fff0ad);
+      box-shadow:0 22px 38px rgba(248,215,108,.25);
+      margin-bottom:12px;
+    }
+    h1,h2,h3,h4,p{margin:0 0 10px}
+    h1{font-size:clamp(2rem,4vw,2.5rem);letter-spacing:-.04em}
+    .muted{color:var(--muted);font-size:13px}
+    .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+    input,select,textarea{
+      width:100%;padding:12px 13px;border-radius:12px;border:1px solid var(--line);background:rgba(10,14,24,.55);color:var(--text);outline:none;transition:all .2s ease;
+    }
+    input:focus,select:focus,textarea:focus{border-color:rgba(124,106,248,.7);box-shadow:0 0 0 4px rgba(124,106,248,.12)}
+    textarea{resize:vertical;min-height:110px}.label{display:block;text-align:left;margin:12px 0 6px;font-size:13px;color:var(--muted);font-weight:600}
+    .btn-gold,.btn-outline,.btn-ghost,.nav-btn,.chip,.quick-btn,.voice-btn{
+      cursor:pointer;border-radius:12px;transition:.2s ease;display:inline-flex;align-items:center;justify-content:center;
+    }
+    .btn-gold{
+      width:100%;margin-top:16px;border:0;padding:12px 14px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#251d00;border-radius:14px;box-shadow:0 20px 30px rgba(248,215,108,.18);
+    }
+    .btn-gold:hover{transform:translateY(-1px) scale(1.01)}
+    .btn-outline{
+      border:1px solid rgba(124,106,248,.45);background:rgba(124,106,248,.06);color:var(--text);padding:8px 12px;
+    }
+    .btn-ghost{background:transparent;border:0;color:var(--muted);padding:8px}
+    .btn-ghost:hover{color:var(--text)}
+    .app{display:grid;grid-template-columns:250px 1fr;min-height:100vh;padding:18px;gap:18px;}
+    .sidebar{
+      padding:18px 14px;border-radius:26px;background:rgba(9,13,25,.72);display:flex;flex-direction:column;gap:12px;position:sticky;top:18px;height:calc(100vh - 36px);
+    }
+    .brand-row{display:flex;align-items:center;gap:12px;padding:6px 10px 14px;border-bottom:1px solid var(--line)}
+    .logo{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--primary),#8dd9ff);display:grid;place-items:center;font-weight:900;color:white;box-shadow:0 18px 30px rgba(124,106,248,.32)}
+    .brand-row small{display:block;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+    .sidebar-nav{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .nav-btn{
+      text-align:left;background:transparent;color:var(--text);border:1px solid transparent;padding:12px 12px;border-radius:14px;font-weight:600;width:100%;justify-content:flex-start;
+    }
+    .nav-btn.active,.nav-btn:hover{background:linear-gradient(135deg, rgba(124,106,248,.18), rgba(255,255,255,.04));border-color:rgba(124,106,248,.24);}
+    .sidebar-spacer{flex:1}
+    .main-shell{display:flex;flex-direction:column;gap:14px}
+    .topbar{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-radius:20px;background:rgba(9,13,25,.62);
+    }
+    .pill{
+      display:inline-flex;align-items:center;justify-content:center;padding:7px 12px;border-radius:999px;background:rgba(124,106,248,.18);border:1px solid rgba(124,106,248,.25);color:var(--text);font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+    }
+    .net{display:inline-flex;align-items:center;justify-content:center;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .net.online{background:rgba(45,212,191,.12);color:#75f0dc;border:1px solid rgba(45,212,191,.28)}
+    .net.offline{background:rgba(239,68,68,.10);color:#ff9ea0;border:1px solid rgba(239,68,68,.28)}
+    .page{display:block}
+    .hidden{display:none!important}
+    .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.stat{padding:18px;border-radius:18px;background:rgba(255,255,255,0.03);border:1px solid var(--line)}
+    .stat span{display:block;font-size:12px;color:var(--muted);margin-bottom:8px}.stat b{display:block;font-size:clamp(1.25rem,2vw,2rem);font-weight:800;letter-spacing:-.04em}
+    .quick{display:flex;gap:10px;margin:6px 0 0;flex-wrap:wrap}.quick-btn{padding:12px 16px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--text);font-weight:700}
+    .panel{padding:16px;border-radius:20px;background:rgba(13,19,34,.7);border:1px solid var(--line);margin-top:12px;}
+    .grid-2{display:grid;grid-template-columns:1.4fr .8fr;gap:12px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.chip{padding:9px 12px;border-radius:999px;background:rgba(124,106,248,.12);border:1px solid rgba(124,106,248,.2);color:var(--text);font-size:12px;font-weight:700}
+    .chip:hover{background:rgba(124,106,248,.18)}
+    table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;vertical-align:top}th{color:var(--muted);font-weight:700}
+    .flag-H{color:#ff9d9d;font-weight:800}.flag-L{color:#7dd5ff;font-weight:800}.flag-N{color:#8ae3d2;font-weight:800}
+    .final{font-size:22px;color:var(--accent);margin-top:10px}.notice{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.25);color:#dbeafe;padding:10px 12px;border-radius:14px;margin-top:10px}
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.kpi{padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+    .assistant-box{display:grid;grid-template-columns:1.25fr .75fr;gap:12px}.ai-card{padding:16px}.voice-btn{padding:12px 14px;background:linear-gradient(135deg, rgba(124,106,248,.22), rgba(45,212,191,.15));border:1px solid rgba(124,106,248,.2);color:var(--text);font-weight:700}
+    .modal{position:fixed;inset:0;background:rgba(2,4,10,.7);display:grid;place-items:center;padding:16px;z-index:20}.modal-card{width:min(760px,100%);padding:18px;border-radius:24px;background:rgba(10,15,28,.85)}
+    .bill-sheet{background:linear-gradient(180deg,#ffffff,#f6f6f8);color:#121212;padding:22px;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+    .badge.warn{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.15)}.badge.good{background:rgba(45,212,191,.14);color:#5eead4;border:1px solid rgba(45,212,191,.2)}.badge.bad{background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
+    .log-list,.list-inline{margin:8px 0 0;padding-left:18px}.list-inline{list-style:none;padding-left:0}.list-inline li{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+    .list-inline button{width:100%;text-align:left;justify-content:flex-start}
+    @media (max-width: 980px){
+      .app{grid-template-columns:1fr;padding:12px;gap:12px}.sidebar{position:static;height:auto;border-radius:20px}
+      .sidebar-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}
+      .stats{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-2,.assistant-box{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}
+    }
+    @media (max-width: 560px){
+      body{font-size:14px}.login-card{padding:22px 18px}.topbar{padding:14px 12px}.row{gap:6px}.stats{grid-template-columns:1fr}.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.quick-btn{padding:10px 8px}
+      .sidebar-nav{grid-template-columns:1fr 1fr}.main-shell{gap:10px}.panel{padding:12px}.kpis{grid-template-columns:1fr}
+      .nav-btn{padding:10px 8px;font-size:12px}.brand-row{padding:4px 6px 10px}
+    }
   </style>
 </head>
 <body>
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
   <div id="loginScreen" class="login-wrap">
     <div class="login-card glass">
+      <div class="brand-badge">H</div>
       <h1>HRGen LIS Pro</h1>
       <p class="muted">Offline-first AI-assisted Lab System</p>
       <form id="loginForm">
         <label class="label">Username</label>
-        <input id="username" required/>
+        <input id="username" autocomplete="username" required/>
         <label class="label">Password</label>
-        <input id="password" type="password" required/>
+        <input id="password" type="password" autocomplete="current-password" required/>
         <button class="btn-gold" type="submit">Login</button>
       </form>
-      <p class="muted">Demo: admin / admin123</p>
+      <p class="muted" style="margin-top:10px">Demo: admin / admin123</p>
     </div>
   </div>
 
   <div id="appScreen" class="app hidden">
-    <aside class="sidebar">
-      <strong>HRGen LIS</strong>
-      <button class="nav-btn active" data-page="dashboard">Dashboard</button>
-      <button class="nav-btn" data-page="newbill">New Bill</button>
-      <button class="nav-btn" data-page="results">Result Entry</button>
-      <button class="nav-btn" data-page="masters">Test Master</button>
-      <button class="nav-btn" data-page="ai">AI Assistant</button>
-      <button class="nav-btn" data-page="workflows">Automation</button>
-      <button class="nav-btn" data-page="reports">Reports</button>
-      <button class="nav-btn" data-page="settings">Settings</button>
+    <aside class="sidebar glass">
+      <div class="brand-row">
+        <div class="logo">H</div>
+        <div>
+          <strong>HRGen LIS</strong>
+          <small>Lab OS</small>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-btn active" data-page="dashboard">Dashboard</button>
+        <button class="nav-btn" data-page="newbill">New Bill</button>
+        <button class="nav-btn" data-page="results">Result Entry</button>
+        <button class="nav-btn" data-page="masters">Test Master</button>
+        <button class="nav-btn" data-page="ai">AI Assistant</button>
+        <button class="nav-btn" data-page="workflows">Automation</button>
+        <button class="nav-btn" data-page="reports">Reports</button>
+        <button class="nav-btn" data-page="settings">Settings</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
       <button id="logoutBtn" class="btn-ghost">Logout</button>
     </aside>
 
-    <main>
-      <header class="topbar">
+    <main class="main-shell">
+      <header class="topbar glass">
         <h2 id="pageTitle">Dashboard</h2>
         <div class="row">
           <span id="netBadge" class="net offline">OFFLINE</span>
@@ -80,13 +199,13 @@
 
       <section id="page-dashboard" class="page">
         <div class="stats">
-          <div class="stat glass"><span class="muted">Aaj Bills</span><b id="statBills">0</b></div>
-          <div class="stat glass"><span class="muted">Patients</span><b id="statPatients">0</b></div>
-          <div class="stat glass"><span class="muted">Pending</span><b id="statPending">0</b></div>
-          <div class="stat glass"><span class="muted">Collection</span><b id="statCash">₹0</b></div>
+          <div class="stat glass"><span>Aaj Bills</span><b id="statBills">0</b></div>
+          <div class="stat glass"><span>Patients</span><b id="statPatients">0</b></div>
+          <div class="stat glass"><span>Pending</span><b id="statPending">0</b></div>
+          <div class="stat glass"><span>Collection</span><b id="statCash">₹0</b></div>
         </div>
         <div class="quick">
-          <button class="btn-gold quick-btn" data-goto="newbill" style="width:auto">+ New Bill</button>
+          <button class="btn-gold quick-btn" data-goto="newbill">+ New Bill</button>
           <button class="btn-outline quick-btn" data-goto="results">Results</button>
           <button class="btn-outline quick-btn" data-goto="ai">AI Assistant</button>
         </div>
@@ -244,6 +363,7 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
